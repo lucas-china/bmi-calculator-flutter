@@ -6,8 +6,14 @@ import 'custom_icon.dart';
 
 
 const bottomContainerHeight = 80.0;
-const activeCardColor = Color(0xFF1D1E33);
-const bottomContainerColor = Color(0xFFFEB1555);
+const activeCardColour = Color(0xFF1D1E33);
+const inactiveCardColour = Color(0xFF111328);
+const bottomContainerColour = Color(0xFFFEB1555);
+
+enum Gender {
+  male,
+  female
+}
 
 class InputPage extends StatefulWidget {
   @override
@@ -15,6 +21,17 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+
+  Gender selectedGender;
+
+  Color getColourCard(Gender gender) {
+    if (gender == Gender.male) {
+      return selectedGender == Gender.male ? activeCardColour : inactiveCardColour;
+    } else {
+      return selectedGender == Gender.female ? activeCardColour : inactiveCardColour;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,20 +44,34 @@ class _InputPageState extends State<InputPage> {
             child: Row(
               children: <Widget>[
                 Expanded(
-                  child: CustomCard(
-                    colour: activeCardColor,
-                    cardChild: CustomIcon(
-                      icon: FontAwesomeIcons.mars,
-                      nameIcon: 'MALE',
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedGender = Gender.male;
+                      });
+                    },
+                    child: CustomCard(
+                      colour: getColourCard(Gender.male),
+                      cardChild: CustomIcon(
+                        icon: FontAwesomeIcons.mars,
+                        nameIcon: 'MALE',
+                      ),
                     ),
                   ),
                 ),
                 Expanded(
-                  child: CustomCard(
-                    colour: activeCardColor,
-                    cardChild: CustomIcon(
-                      icon: FontAwesomeIcons.venus,
-                      nameIcon: 'FAMALE',
+                  child: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedGender = Gender.female;
+                      });
+                    },
+                    child: CustomCard(
+                      colour: getColourCard(Gender.female),
+                      cardChild: CustomIcon(
+                        icon: FontAwesomeIcons.venus,
+                        nameIcon: 'FAMALE',
+                      ),
                     ),
                   ),
                 ),
@@ -49,7 +80,7 @@ class _InputPageState extends State<InputPage> {
           ),
           Expanded(
             child: CustomCard(
-              colour: activeCardColor,
+              colour: activeCardColour,
             ),
           ),
           Expanded(
@@ -57,19 +88,19 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
                   child: CustomCard(
-                    colour: activeCardColor,
+                    colour: activeCardColour,
                   ),
                 ),
                 Expanded(
                   child: CustomCard(
-                    colour: activeCardColor,
+                    colour: activeCardColour,
                   ),
                 ),
               ],
             ),
           ),
           Container(
-            color: bottomContainerColor,
+            color: bottomContainerColour,
             margin: EdgeInsets.only(top: 10.0),
             width: double.infinity,
             height: bottomContainerHeight,
