@@ -21,9 +21,9 @@ class _InputPageState extends State<InputPage> {
 
   Color getColourCard(Gender gender) {
     if (gender == Gender.male) {
-      return selectedGender == Gender.male ? activeCardColour : inactiveCardColour;
+      return selectedGender == Gender.male ? kActiveCardColour : kInactiveCardColour;
     } else {
-      return selectedGender == Gender.female ? activeCardColour : inactiveCardColour;
+      return selectedGender == Gender.female ? kActiveCardColour : kInactiveCardColour;
     }
   }
 
@@ -71,7 +71,7 @@ class _InputPageState extends State<InputPage> {
           ),
           Expanded(
             child: CustomCard(
-              colour: activeCardColour,
+              colour: kActiveCardColour,
               cardChild: Column(
 
               ),
@@ -82,22 +82,22 @@ class _InputPageState extends State<InputPage> {
               children: <Widget>[
                 Expanded(
                   child: CustomCard(
-                    colour: activeCardColour,
+                    colour: kActiveCardColour,
                   ),
                 ),
                 Expanded(
                   child: CustomCard(
-                    colour: activeCardColour,
+                    colour: kActiveCardColour,
                   ),
                 ),
               ],
             ),
           ),
           Container(
-            color: bottomContainerColour,
+            color: kBottomContainerColour,
             margin: EdgeInsets.only(top: 10.0),
             width: double.infinity,
-            height: bottomContainerHeight,
+            height: kBottomContainerHeight,
           ),
         ],
       ),

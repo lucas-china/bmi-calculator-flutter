@@ -22,7 +22,7 @@ class CustomIcon extends StatelessWidget {
         SizedBox(height: sizeBoxHeight,),
         Text(
           nameIcon,
-          style: labelTextStyle,
+          style: kLabelTextStyle,
         ),
       ],
     );
