@@ -18,6 +18,8 @@ class InputPage extends StatefulWidget {
 class _InputPageState extends State<InputPage> {
 
   Gender selectedGender;
+  int height = 180;
+  int weight = 60;
 
   Color getColourCard(Gender gender) {
     if (gender == Gender.male) {
@@ -34,6 +36,7 @@ class _InputPageState extends State<InputPage> {
         title: Text('BMI CALCULATOR'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
             child: Row(
@@ -73,7 +76,49 @@ class _InputPageState extends State<InputPage> {
             child: CustomCard(
               colour: kActiveCardColour,
               cardChild: Column(
-
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                    'HEIGHT',
+                    style: kLabelTextStyle,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: <Widget>[
+                      Text(
+                        height.toString(),
+                        style: kBigLabelTextStyle
+                      ),
+                      SizedBox(width: 4,),
+                      Text(
+                        'cm',
+                        style: kLabelTextStyle,
+                      ),
+                    ],
+                  ),
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      activeTrackColor: Colors.white,
+                      inactiveTrackColor: kInactiveSliderColour,
+                      thumbColor: kThumbSliderColour,
+                      thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                      overlayShape: RoundSliderOverlayShape(overlayRadius: 30.0),
+                      overlayColor: kOverlayThumbColour,
+                    ),
+                    child: Slider(
+                      value: height.toDouble(),
+                      min: 120.0,
+                      max: 220.0, 
+                      onChanged: (double newValue) {
+                        setState(() {
+                          height = newValue.toInt();
+                        });
+                      }
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
@@ -83,6 +128,19 @@ class _InputPageState extends State<InputPage> {
                 Expanded(
                   child: CustomCard(
                     colour: kActiveCardColour,
+                    cardChild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'WEIGHT',
+                          style: kLabelTextStyle,
+                        ),
+                        Text( 
+                          weight.toString(),
+                          style: kBigLabelTextStyle,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Expanded(
